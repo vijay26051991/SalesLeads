@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
 public class MessagingQueueConsumers {
 
     @RabbitListener(queues = "${leads.email.queue}")
-    public void consumeEmailMessage(String message){
-        System.out.println(message);
+    public void consumeEmailMessage(String message) throws JsonProcessingException {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final LeadsModel leadsModel = objectMapper.readValue(message, LeadsModel.class);
+        System.out.println(String.format("Subscriber 1:[Channel: Email] [LeadID: %d] [Message: Email Sent]" , leadsModel.getLeadId()));
     }
 
     @RabbitListener(queues = "${leads.mobile.queue}")
