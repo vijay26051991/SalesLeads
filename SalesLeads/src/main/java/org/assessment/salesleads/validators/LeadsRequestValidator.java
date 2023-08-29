@@ -7,7 +7,6 @@ import org.assessment.salesleads.model.LeadsRequest;
 import org.assessment.salesleads.utils.CommunicationMode;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -43,9 +42,9 @@ public class LeadsRequestValidator implements BaseValidator<LeadsRequest> {
             throw new SalesLeadsException(leadsRequest.getLeadId(), ErrorCode.MOBILE_OR_EMAIL_EXISTS);
         }
 
-        /*if (leadsRequest.getMobileNumber() != null && INT_PHONE_REGEX.matcher(leadsRequest.getMobileNumber()).find()) {
+        if (StringUtils.isNotEmpty(leadsRequest.getMobileNumber()) && !(INT_PHONE_REGEX.matcher(leadsRequest.getMobileNumber()).find())) {
             throw new SalesLeadsException(leadsRequest.getLeadId(), ErrorCode.INVALID_MOBILE_NUMBER_FORMAT);
-        }*/
+        }
 
         if (leadsRequest.getEmailId() != null && !EMAIL_REGEX.matcher(leadsRequest.getEmailId()).find()) {
             throw new SalesLeadsException(leadsRequest.getLeadId(), ErrorCode.INVALID_EMAIL_FORMAT);
