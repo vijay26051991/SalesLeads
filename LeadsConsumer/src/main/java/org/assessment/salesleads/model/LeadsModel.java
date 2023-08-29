@@ -1,19 +1,28 @@
 package org.assessment.salesleads.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class LeadsModel {
 
+    @JsonProperty("lead_id")
     private Integer leadId;
 
+    @JsonProperty("source")
     private String source;
 
+    @JsonProperty("lead_name")
     private String leadName;
 
+    @JsonProperty("lead_mobile_number")
     private String mobileNumber;
 
+    @JsonProperty("lead_email_id")
     private String emailId;
 
+    @JsonProperty("preferred_mobile_communication_mode")
     private String mobileCommunicationMode;
 
+    @JsonProperty("lead_message")
     private String leadMessage;
 
     public Integer getLeadId() {
